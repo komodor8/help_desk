@@ -1,10 +1,10 @@
 [
   {
     "id": 1,
-    "username": "alice",
-    "password": "alice123",
+    "username": "farid",
+    "password": "farid123",
     "role": "etudiant",
-    "name": "Alice Martin"
+    "name": "Farid, Le F"
   },
   {
     "id": 2,

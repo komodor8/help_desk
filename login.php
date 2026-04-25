@@ -46,14 +46,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Connexion — Helpdesk</title>
-</head>
-<body>
-    <h1>Connexion</h1>
+<?php require_once 'includes/header.php'; ?>
+<?php require_once 'includes/navbar.php'; ?>
+
+<div class="container">
+    <h1 class="mb-4">Connexion</h1>
 
     <?php if (!empty($error)): ?>
         <p style="color: red;"><?= htmlspecialchars($error) ?></p>
@@ -68,5 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </label><br>
         <button type="submit">Se connecter</button>
     </form>
-</body>
-</html>
+
+</div>
+
+<?php require_once 'includes/footer.php'; ?>

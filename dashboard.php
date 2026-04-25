@@ -2,15 +2,13 @@
 require_once 'includes/auth.php';
 requireLogin();
 ?>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Dashboard — Helpdesk</title>
-</head>
-<body>
+<?php require_once 'includes/header.php'; ?>
+<?php require_once 'includes/navbar.php'; ?>
+
+<div class="container">
+    <h1 class="mb-4">Dashboard</h1>
     <h1>Bienvenue, <?= htmlspecialchars($_SESSION['name']) ?> !</h1>
     <p>Rôle : <strong><?= htmlspecialchars($_SESSION['role']) ?></strong></p>
-    <a href="logout.php">Se déconnecter</a>
-</body>
-</html>
+</div>
+
+<?php require_once 'includes/footer.php'; ?>
