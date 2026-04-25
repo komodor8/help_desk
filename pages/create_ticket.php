@@ -1,7 +1,7 @@
 <?php
 // ── TRAITEMENT ──────────────────────────────────────────────
-require_once 'includes/auth.php';
-require_once 'includes/db.php';
+require_once __DIR__ . '/../includes/auth.php';
+require_once __DIR__ . '/../includes/db.php';
 requireRole('etudiant');   // seuls les étudiants créent des tickets
 
 $errors = [];

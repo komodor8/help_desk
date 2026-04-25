@@ -1,5 +1,5 @@
 <?php
-require_once 'includes/auth.php';
+require_once __DIR__ . '/../includes/auth.php';
 requireLogin();
 ?>
 <?php require_once 'includes/header.php'; ?>

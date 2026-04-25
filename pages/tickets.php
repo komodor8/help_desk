@@ -1,7 +1,7 @@
 <?php
 // ── TRAITEMENT ──────────────────────────────────────────────
-require_once 'includes/auth.php';
-require_once 'includes/db.php';
+require_once __DIR__ . '/../includes/auth.php';
+require_once __DIR__ . '/../includes/db.php';
 requireLogin();
 
 $pdo = getDB();
@@ -25,7 +25,7 @@ $tickets = $stmt->fetchAll();
     <h1 class="mb-4">Mes tickets</h1>
 
     <?php if ($_SESSION['role'] === 'etudiant'): ?>
-        <a href="create_ticket.php">+ Nouveau ticket</a>
+        <a href="pages/create_ticket.php">+ Nouveau ticket</a>
     <?php endif; ?>
 
     <?php if (empty($tickets)): ?>

@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['role']      = $found['role'];
             $_SESSION['name']      = $found['name'];
 
-            header('Location: dashboard.php');
+            header('Location: /pages/dashboard.php');
             exit();
         } else {
             $error = 'Identifiant ou mot de passe incorrect.';
