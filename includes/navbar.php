@@ -12,7 +12,7 @@ $roleLabel  = $role === 'tuteur' ? 'Tuteur' : 'Étudiant';
     <div class="container">
 
         <!-- Logo / nom de l'app -->
-        <a class="navbar-brand fw-bold" href="pages/dashboard.php">
+        <a class="navbar-brand fw-bold" href="dashboard.php">
             <i class="bi bi-headset me-2"></i>Helpdesk
         </a>
 
@@ -27,7 +27,7 @@ $roleLabel  = $role === 'tuteur' ? 'Tuteur' : 'Étudiant';
             <!-- Liens de gauche -->
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="pages/tickets.php">
+                    <a class="nav-link" href="list.php">
                         <i class="bi bi-ticket me-1"></i>Tickets
                     </a>
                 </li>
@@ -50,7 +50,7 @@ $roleLabel  = $role === 'tuteur' ? 'Tuteur' : 'Étudiant';
                     </span>
                 </li>
                 <li class="nav-item">
-                    <a class="btn btn-outline-light btn-sm" href="logout.php">
+                    <a class="btn btn-outline-light btn-sm" href="/logout.php">
                         <i class="bi bi-box-arrow-right me-1"></i>Déconnexion
                     </a>
                 </li>

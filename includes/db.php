@@ -46,3 +46,33 @@ function getDB(): PDO {
 //     message    TEXT         NOT NULL,
 //     created_at TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP
 // );
+
+// CREATE TABLE users (
+//     id         SERIAL PRIMARY KEY,
+//     username   VARCHAR(100) NOT NULL UNIQUE,
+//     password   VARCHAR(255) NOT NULL,
+//     name       VARCHAR(100) NOT NULL,
+//     role       VARCHAR(20)  NOT NULL CHECK (role IN ('etudiant', 'tuteur')),
+//     created_at TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP
+// );
+
+
+// INSERT INTO users (username, password, name, role) VALUES
+// (
+//     'farid',
+//     '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+//     'Farid le F',
+//     'etudiant'
+// ),
+// (
+//     'Rayan',
+//     '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+//     'Rayan le R',
+//     'etudiant'
+// ),
+// (
+//     'Lylia',
+//     '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+//     'Prof. ABROUK',
+//     'tuteur'
+// );
