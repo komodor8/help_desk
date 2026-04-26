@@ -3,7 +3,7 @@ require_once 'includes/auth.php';
 startSession();
 
 if (isset($_SESSION['user_id'])) {
-    header('Location: /pages/dashboard.php');
+    header('Location: /tickets/dashboard.php');
     exit();
 }
 
