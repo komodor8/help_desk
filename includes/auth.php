@@ -56,6 +56,30 @@ function login(string $username, string $password): bool {
     return true;
 }
 
+/**
+ * Génère un token CSRF et le stocke en session.
+ */
+function csrf_token(): string {
+    startSession();
+    if (empty($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
+    return $_SESSION['csrf_token'];
+}
+
+/**
+ * Vérifie le token CSRF reçu dans POST.
+ * Appeler au début de chaque traitement POST.
+ */
+function verify_csrf(): void {
+    startSession();
+    $token = $_POST['csrf_token'] ?? '';
+    if (!hash_equals($_SESSION['csrf_token'] ?? '', $token)) {
+        http_response_code(403);
+        die('Token CSRF invalide. Veuillez réessayer.');
+    }
+}
+
 function logout(): void {
     startSession();
     $_SESSION = [];

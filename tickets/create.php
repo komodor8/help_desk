@@ -7,6 +7,7 @@ requireRole('etudiant');   // seuls les étudiants créent des tickets
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    verify_csrf();
 
     $title       = trim($_POST['title']       ?? '');
     $description = trim($_POST['description'] ?? '');
@@ -55,6 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php endif; ?>
 
     <form method="POST" action="create.php">
+        <input type="hidden" name="csrf_token" value="<?= csrf_token() ?>">
 
         <!-- Titre -->
         <div class="mb-3">

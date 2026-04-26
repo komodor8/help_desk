@@ -6,7 +6,7 @@ requireLogin();
 
 // 1. Vérifier que l'ID existe dans l'URL et qu'il est bien un entier
 if (!isset($_GET['id']) || !ctype_digit($_GET['id'])) {
-    header('Location: tickets.php');
+    header('Location: list.php');
     exit();
 }
 
@@ -20,13 +20,13 @@ $ticket = $stmt->fetch();
 
 // 3. Le ticket existe ?
 if (!$ticket) {
-    header('Location: tickets.php');
+    header('Location: list.php');
     exit();
 }
 
 // 4. Contrôle d'accès : un étudiant ne peut voir QUE ses tickets
 if ($_SESSION['role'] === 'etudiant' && $ticket['user_id'] !== $_SESSION['user_id']) {
-    header('Location: tickets.php');
+    header('Location: list.php');
     exit();
 }
 
@@ -37,6 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'
     && $_POST['action'] === 'update_status'
     && $_SESSION['role'] === 'tuteur'
 ) {
+    verify_csrf();
     $newStatus = $_POST['status'] ?? '';
 
     if (!in_array($newStatus, ['Ouvert', 'En cours', 'Résolu'])) {
@@ -62,6 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'
     && isset($_POST['action'])
     && $_POST['action'] === 'add_comment'
 ) {
+    verify_csrf();
     $message = trim($_POST['message'] ?? '');
 
     if (empty($message)) {
@@ -176,6 +178,7 @@ $pageTitle = 'Dashboard';
 
             <form method="POST" action="detail.php?id=<?= $id ?>"
                   class="d-flex align-items-center gap-3 flex-wrap">
+                <input type="hidden" name="csrf_token" value="<?= csrf_token() ?>">
                 <input type="hidden" name="action" value="update_status">
 
                 <select name="status" class="form-select w-auto">
@@ -244,6 +247,7 @@ $pageTitle = 'Dashboard';
                 <?php endif; ?>
 
                 <form method="POST" action="detail.php?id=<?= $id ?>">
+                    <input type="hidden" name="csrf_token" value="<?= csrf_token() ?>">
                     <input type="hidden" name="action" value="add_comment">
                     <textarea name="message" class="form-control mb-2" rows="3"
                               placeholder="Écris ton commentaire ici…" required></textarea>

@@ -1,33 +1,81 @@
-# help_desk
+# Helpdesk — Mini application de gestion de tickets
 
-## Choix Techniques
+Mini helpdesk en PHP réalisé dans le cadre du projet DAW (L3).
 
-Dans le cadre de ce projet, J'ai pris le parti de privilégier la robustesse, la portabilité et la simplicité de déploiement. Voici la justification de la stack technique :
+## Membres du groupe
 
-### 1. Architecture et Déploiement : Docker
-* **Portabilité et Simplicité :** J'ai conteneurisé l'application avec Docker. Cela permet de packager le code, le serveur web et la base de données dans des environnements isolés. 
-* **Zéro problème de version :** N'importe quel utilisateur (ou correcteur) disposant de Docker peut lancer l'application avec une simple commande, sans avoir à installer ou configurer manuellement PHP, un serveur web ou un moteur de base de données sur sa machine. J'avais aussi le choix avec MAMP.
+- Farid
+- Rayan
+- Lylia
 
-### 2. Base de données : PostgreSQL
-* **Modèle relationnel :** Bien que l'option de base (fichiers JSON/CSV) était possible, j'ai opté pour PostgreSQL. L'application nécessitant des relations claires entre différentes entités (Utilisateurs -> Tickets <- Commentaires), une base de données relationnelle était la solution la plus logique et performante.
-* **Sécurité et Fiabilité :** PostgreSQL est un SGBD réputé pour sa robustesse. L'accès aux données se fait strictement via **PDO** avec l'utilisation systématique de **requêtes préparées**, répondant ainsi aux exigences de sécurité du sujet (prévention des injections SQL).
+## Choix techniques
 
-### 3. Outil d'administration : Adminer
-* **Légèreté et Praticité :** Pour la gestion de la base de données en cours de développement, j'ai intégré Adminer au stack Docker. Contrairement à des solutions plus lourdes, Adminer offre une interface web simple et efficace pour visualiser les tables, exécuter des requêtes SQL personnalisées et gérer les imports/exports du schéma de données.
+| Technologie | Raison |
+|---|---|
+| **PHP 8.2** (sans framework) | Imposé par le sujet |
+| **PostgreSQL 15** | Stockage relationnel, bonus base de données |
+| **PDO** | Accès sécurisé aux données (requêtes préparées) |
+| **Docker + docker-compose** | Environnement reproductible, bonus conteneurisation |
+| **Bootstrap 5.3** (CDN) | UI responsive rapide |
+| **Bootstrap Icons** | Icônes légères et cohérentes |
 
-### 4. Interface Graphique et Frontend : Bootstrap
-* **Efficacité et Standardisation :** Afin de proposer une interface claire, responsive et ergonomique sans perdre de temps sur l'intégration CSS, j'ai utilisé le framework CSS Bootstrap. Cela nous a permis de nous concentrer pleinement sur la logique PHP (back-end) tout en offrant un visuel propre et standardisé.
-* **Absence de JavaScript :** J'ai volontairement fait le choix de ne pas utiliser de JavaScript. L'application repose entièrement sur un rendu côté serveur (Server-Side Rendering) avec PHP. Toutes les validations de formulaires et les redirections sont gérées par le serveur, ce qui garantit que la sécurité et la logique métier ne peuvent pas être contournées côté client.
+## Prérequis
+
+- Docker et docker-compose installés
+
+## Lancement
+
+```bash
+docker compose up -d
+```
+
+L'application est accessible sur http://localhost:8000
+
+Adminer (gestionnaire BD) : http://localhost:8081
+
+## Comptes de test
+
+| Identifiant | Mot de passe | Rôle |
+|---|---|---|
+| farid | password | Étudiant |
+| Rayan | password | Étudiant |
+| Lylia | password | Tuteur |
+
+## Script SQL
+
+Le fichier `schema.sql` contient la structure complète de la base de données ainsi que les données de test.
+
+Pour initialiser la base automatiquement :
+
+1. Lancer les conteneurs : `docker compose up -d`
+2. Ouvrir Adminer (http://localhost:8081)
+3. Sélectionner PostgreSQL, utilisateur `farid`, mot de passe `farid123`, base `help_desk_db`
+4. Coller et exécuter le contenu de `schema.sql`
+
+## Structure du projet
+
+```
+help_desk/
+├── Dockerfile
+├── docker-compose.yml
+├── schema.sql
+├── index.php
+├── login.php
+├── logout.php
+├── includes/
+│   ├── auth.php      # Gestion des sessions + CSRF
+│   ├── db.php        # Connexion PDO
+│   ├── header.php
+│   ├── navbar.php
+│   └── footer.php
+└── tickets/
+    ├── dashboard.php  # Profil utilisateur
+    ├── list.php       # Liste des tickets
+    ├── create.php     # Création d'un ticket
+    └── detail.php     # Détail + commentaires
+```
 
 
-## Perspectives d'Évolution
-
-En raison des contraintes de temps, je me suis concentrés sur la robustesse du cœur de l'application (sécurité, base de données, logique métier). Cependant, voici les fonctionnalités prévues qui constituent la suite logique du développement :
-
-* **Filtres et tri avancés :** Ajout de filtres sur la page des tickets (par statut, catégorie ou priorité) pour faciliter la gestion et la recherche, particulièrement pour le rôle Tuteur.
-* **Pagination :** Implémentation d'un système de pagination sur la liste des tickets afin d'optimiser le temps de chargement et l'expérience utilisateur lorsque le volume de données augmentera.
-* **Création de compte (Inscription) :** Développement d'une page `register.php` sécurisée permettant à de nouveaux étudiants de s'inscrire de manière autonome sur la plateforme.
-* **Modification du mot de passe :** Activation du bouton actuellement présent sur le tableau de bord pour permettre aux utilisateurs de mettre à jour leur mot de passe et de gérer la sécurité de leur propre compte.
 
 ## `La logique métier du sujet`
 
@@ -65,7 +113,7 @@ En raison des contraintes de temps, je me suis concentrés sur la robustesse du 
 
 
 ## `fonctionnalités réutilisables`
-   
+
 ### `auth.php`
 1. **startSession()**
    Lance `session_start()` seulement si `PHP_SESSION_NONE` — évite l'erreur "session already started".

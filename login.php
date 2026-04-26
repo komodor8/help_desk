@@ -10,6 +10,7 @@ if (isset($_SESSION['user_id'])) {
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    verify_csrf();
     $username = trim($_POST['username'] ?? '');
     $password = trim($_POST['password'] ?? '');
 
@@ -37,6 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php endif; ?>
 
             <form method="POST" action="/login.php">
+                <input type="hidden" name="csrf_token" value="<?= csrf_token() ?>">
                 <div class="mb-3">
                     <label class="form-label">Identifiant</label>
                     <input type="text" name="username" class="form-control"
