@@ -1,8 +1,8 @@
 # Helpdesk — Mini application de gestion de tickets
 
-Mini helpdesk en PHP réalisé dans le cadre du projet DAW (L3).
+Mini helpdesk en PHP - projet DAW (L3).
 
-## Membres du groupe
+## Membre du groupe
 
 - Farid LKHALDOUNI
 
@@ -26,7 +26,7 @@ Mini helpdesk en PHP réalisé dans le cadre du projet DAW (L3).
 
 ```bash
 # 1. Cloner le projet
-git clone <url-du-repo>
+git clone https://github.com/komodor8/help_desk.git
 cd help_desk
 
 # 2. Tout lancer d'un coup (conteneurs + base de données)
