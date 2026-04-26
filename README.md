@@ -19,7 +19,7 @@ Mini helpdesk en PHP - projet DAW (L3).
 
 ## Prérequis
 
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/) installé
+- [Docker](https://www.docker.com/products/docker-desktop/) installé
 - Git installé (pour cloner)
 
 ## Installation et lancement
