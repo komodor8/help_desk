@@ -211,7 +211,7 @@ En raison des contraintes de temps, je me suis concentré sur la robustesse du c
    `isset($_GET['id'])` + `ctype_digit()` → vérifie que l'ID existe dans l'URL et est bien un entier. Sinon, redirection.
 3. **Ticket existe ?** `[SÉCURITÉ]`
    `SELECT * FROM tickets WHERE id = :id`. Si `fetch()` retourne `false` → redirection vers `tickets.php`.
-4. **Contrôle d'accès IDOR** `[SÉCURITÉ]` `[RÔLE]`
+4. **Contrôle d'accès** `[SÉCURITÉ]` `[RÔLE]`
    Si rôle étudiant ET `ticket.user_id ≠ session.user_id` → redirection. Empêche un étudiant de lire les tickets d'autrui en changeant l'ID dans l'URL.
 5. **POST update_status** `[RÔLE]` `[VALIDATION]`
    Vérifie rôle tuteur + valeur comprise dans `[Ouvert, En cours, Résolu]` → `UPDATE tickets SET status`. Redirection (POST/Redirect/GET).
