@@ -4,9 +4,7 @@ Mini helpdesk en PHP réalisé dans le cadre du projet DAW (L3).
 
 ## Membres du groupe
 
-- Farid
-- Rayan
-- Lylia
+- Farid LKHALDOUNI
 
 ## Choix techniques
 
